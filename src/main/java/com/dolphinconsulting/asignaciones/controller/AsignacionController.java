@@ -1,53 +1,59 @@
 package com.dolphinconsulting.asignaciones.controller;
 
 import com.dolphinconsulting.asignaciones.service.AsignacionService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 @Controller
-@RequiredArgsConstructor
 public class AsignacionController {
 
-    private final AsignacionService asignacionService;
+    @Autowired(required = false)
+    private AsignacionService asignacionService;
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("mesActual", LocalDate.now().getMonthValue());
-        model.addAttribute("anioActual", LocalDate.now().getYear());
+    public String index() {
         return "index";
     }
 
+    @PostMapping("/procesar")
+    public String procesar(@RequestParam("mes") Integer mes,
+                           @RequestParam("anio") Integer anio) {
+        if (asignacionService != null) {
+            asignacionService.procesarAsignaciones(mes, anio);
+            return "redirect:/asignaciones?mes=" + mes + "&anio=" + anio;
+        }
+        return "redirect:/?error=SinConexionBD";
+    }
+
     @GetMapping("/asignaciones")
-    public String verAsignaciones(@RequestParam(defaultValue = "0") int mes, 
-                                 @RequestParam(defaultValue = "0") int anio,
-                                 Model model) {
-        if (mes == 0) mes = LocalDate.now().getMonthValue();
-        if (anio == 0) anio = LocalDate.now().getYear();
-        
-        model.addAttribute("asignaciones", asignacionService.obtenerAsignaciones(mes, anio));
+    public String asignaciones(@RequestParam("mes") Integer mes,
+                               @RequestParam("anio") Integer anio,
+                               @RequestParam(value = "run", required = false) String run,
+                               Model model) {
+        if (asignacionService != null) {
+            List<Map<String, Object>> datos = asignacionService.listarAsignaciones(mes, anio, run);
+            model.addAttribute("asignaciones", datos);
+        }
         model.addAttribute("mes", mes);
         model.addAttribute("anio", anio);
+        model.addAttribute("run", run);
         return "asignaciones";
     }
 
-    @GetMapping("/auditorias")
-    public String verAuditorias(Model model) {
-        model.addAttribute("auditorias", asignacionService.obtenerAuditorias());
-        return "auditorias";
-    }
-
-    @PostMapping("/procesar")
-    public String procesarAsignaciones(@RequestParam int mes, @RequestParam int anio, Model model) {
-        try {
-            asignacionService.procesarAsignaciones(mes, anio);
-            model.addAttribute("mensaje", "Asignaciones procesadas correctamente");
-        } catch (Exception e) {
-            model.addAttribute("error", "Error al procesar asignaciones: " + e.getMessage());
+    @GetMapping("/buscar")
+    public String buscar(@RequestParam("q") String q, Model model) {
+        if (asignacionService != null) {
+            List<Map<String, Object>> profesionales = asignacionService.buscarProfesionales(q);
+            model.addAttribute("profesionales", profesionales);
         }
-        return "redirect:/asignaciones?mes=" + mes + "&anio=" + anio;
+        model.addAttribute("q", q);
+        return "index"; // reutilizamos index mostrando resultados debajo
     }
 }

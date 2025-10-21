@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Pruebas de Funciones y Trigger</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css" />
+</head>
+<body class="container py-4">
+    <h2>Pruebas</h2>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">calcular_honorarios(sueldo)</div>
+                <div class="card-body">
+                    <form th:action="@{/pruebas/calcular-honorarios}" method="post" class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label">Sueldo</label>
+                            <input class="form-control" type="number" step="0.01" name="sueldo" required />
+                        </div>
+                        <div class="col-md-3 align-self-end">
+                            <button class="btn btn-primary" type="submit">Calcular</button>
+                        </div>
+                    </form>
+                    <div class="mt-2" th:if="${honorarios} != null">
+                        Resultado: <strong th:text="${honorarios}"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">calcular_asig_contrato(cod_tpcontrato, honorarios)</div>
+                <div class="card-body">
+                    <form th:action="@{/pruebas/calcular-asig-contrato}" method="post" class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo Contrato</label>
+                            <input class="form-control" type="number" name="codTpContrato" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Honorarios</label>
+                            <input class="form-control" type="number" step="0.01" name="honorarios" required />
+                        </div>
+                        <div class="col-md-3 align-self-end">
+                            <button class="btn btn-primary" type="submit">Calcular</button>
+                        </div>
+                    </form>
+                    <div class="mt-2" th:if="${asigContrato} != null">
+                        Resultado: <strong th:text="${asigContrato}"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">calcular_asig_profesion(cod_profesion, sueldo)</div>
+                <div class="card-body">
+                    <form th:action="@{/pruebas/calcular-asig-profesion}" method="post" class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label">Profesión</label>
+                            <input class="form-control" type="number" name="codProfesion" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Sueldo</label>
+                            <input class="form-control" type="number" step="0.01" name="sueldo" required />
+                        </div>
+                        <div class="col-md-3 align-self-end">
+                            <button class="btn btn-primary" type="submit">Calcular</button>
+                        </div>
+                    </form>
+                    <div class="mt-2" th:if="${asigProfesion} != null">
+                        Resultado: <strong th:text="${asigProfesion}"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">calcular_asig_movilizacion(cod_comuna, honorarios)</div>
+                <div class="card-body">
+                    <form th:action="@{/pruebas/calcular-asig-movilizacion}" method="post" class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label">Comuna</label>
+                            <input class="form-control" type="number" name="codComuna" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Honorarios</label>
+                            <input class="form-control" type="number" step="0.01" name="honorarios" required />
+                        </div>
+                        <div class="col-md-3 align-self-end">
+                            <button class="btn btn-primary" type="submit">Calcular</button>
+                        </div>
+                    </form>
+                    <div class="mt-2" th:if="${asigMovilizacion} != null">
+                        Resultado: <strong th:text="${asigMovilizacion}"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Disparar trigger de auditoría (actualizar sueldo)</div>
+                <div class="card-body">
+                    <form th:action="@{/pruebas/trigger-actualizar-sueldo}" method="post" class="row g-2">
+                        <div class="col-md-3">
+                            <label class="form-label">RUN</label>
+                            <input class="form-control" type="text" name="run" placeholder="12345678" required />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Nuevo sueldo</label>
+                            <input class="form-control" type="number" step="0.01" name="nuevoSueldo" required />
+                        </div>
+                        <div class="col-md-3 align-self-end">
+                            <button class="btn btn-warning" type="submit">Actualizar</button>
+                        </div>
+                    </form>
+                    <p class="mt-2 text-muted">Después de actualizar, revisa <a th:href="@{/auditorias}">Auditorías</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a class="btn btn-outline-secondary" th:href="@{/}">Volver</a>
+    </div>
+
+    <script src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
