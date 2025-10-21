@@ -1,90 +1,59 @@
-# Sistema de Asignaciones para Profesionales
+# Sistema de Asignaciones (Spring Boot + Oracle)
 
-Este proyecto implementa una interfaz web con Spring Boot para el sistema de cálculo de asignaciones para profesionales de la salud, conectándose a una base de datos Oracle donde se encuentran los procedimientos almacenados, funciones y paquetes PL/SQL desarrollados previamente.
-
-## Características
-
-- Cálculo de asignaciones mensuales para profesionales
-- Visualización de asignaciones procesadas
-- Consulta de auditorías de cambios de sueldo
-- Manejo de errores y validaciones
-- API REST para integración con otros sistemas
+Aplicación web con Spring Boot y Thymeleaf que se conecta a Oracle para:
+- Procesar asignaciones mensuales invocando el paquete `pkg_asignaciones`.
+- Listar `detalle_asignacion_mes` por mes/año y filtrar por RUN.
+- Buscar profesionales por nombre o RUT.
+- Mostrar la hoja de auditoría de sueldos (`auditoria_sueldos`).
+- Probar funciones del paquete y disparar el trigger actualizando sueldo.
 
 ## Requisitos
+- Java 11+ y Maven 3.6+ (o IDE con soporte Spring Boot).
+- Oracle 19c+ con objetos SQL cargados.
+- Scripts SQL ejecutados en orden: `Crea_BD_DolphinConsulting.sql`, `01_tablas_auditoria.sql`, `02_triggers.sql`, `03_funciones_basicas.sql`, `04_package_spec.sql`, `05_package_body.sql` (opcional: `refactor/12_proceso_bloque_plsql.sql`).
 
-- Java 11 o superior
-- Maven 3.6 o superior
-- Base de datos Oracle 19c o superior
-- Scripts SQL previamente ejecutados (01_tablas_auditoria.sql hasta 06_pruebas.sql)
+## Configuración de Oracle
+Edite `src/main/resources/application.properties` y descomente según su entorno:
+- Sin Wallet:
+  - `spring.datasource.url=jdbc:oracle:thin:@//HOST:PORT/SERVICE`
+  - `spring.datasource.username=USER`
+  - `spring.datasource.password=PASSWORD`
+  - `spring.datasource.driver-class-name=oracle.jdbc.OracleDriver`
+- Con Wallet (TCPS), ejemplo:
+  - `spring.datasource.url=jdbc:oracle:thin:@DB_ALIAS?TNS_ADMIN=c:\\Users\\vina\\Desktop\\ejercicio\\Bd\\Wallet_DolphinConsulting`
 
-## Configuración
-
-1. Asegúrese de tener instalado Java y Maven
-2. Configure la conexión a la base de datos Oracle en `src/main/resources/application.properties`
-3. Ejecute los scripts SQL en el siguiente orden:
-   - 01_tablas_auditoria.sql
-   - 02_triggers.sql
-   - 03_funciones_basicas.sql
-   - 04_package_spec.sql
-   - 05_package_body.sql
-   - 06_pruebas.sql
+Notas de encoding: use `AL32UTF8` en BD y clientes (`NLS_LANG=.AL32UTF8`) para ñ y acentos.
 
 ## Ejecución
+- Con Maven: `mvn -DskipTests spring-boot:run`
+- Con IDE: ejecutar `AsignacionesApplication`.
 
-Para ejecutar la aplicación:
+Abra `http://localhost:8080/`.
 
-```bash
-mvn spring-boot:run
-```
+## Navegación Web
+- `/` Inicio: procesar Mes/Año, buscar por nombre o RUT, enlaces a Auditorías y Pruebas.
+- `/asignaciones?mes=MM&anio=YYYY[&run=RUT]` Listado de asignaciones.
+- `/auditorias` Hoja de auditoría de sueldos.
+- `/pruebas` Formularios para funciones del paquete y actualizar sueldo (trigger).
 
-La aplicación estará disponible en: http://localhost:8080
+## Estructura principal
+- `src/main/java/com/dolphinconsulting/asignaciones/AsignacionesApplication.java`
+- `src/main/java/com/dolphinconsulting/asignaciones/service/AsignacionService.java`
+- `src/main/java/com/dolphinconsulting/asignaciones/controller/AsignacionController.java`
+- `src/main/java/com/dolphinconsulting/asignaciones/controller/AuditoriaController.java`
+- `src/main/java/com/dolphinconsulting/asignaciones/controller/PruebasController.java`
+- `src/main/resources/templates/index.html`
+- `src/main/resources/templates/asignaciones.html`
+- `src/main/resources/templates/auditorias.html`
+- `src/main/resources/templates/pruebas.html`
 
-## Estructura del Proyecto
+## Detalles funcionales
+- Proceso mensual: invoca `pkg_asignaciones.procesar_asignaciones_mes(mes, anio)`.
+- Trigger de auditoría: `AFTER UPDATE OF sueldo ON profesional` inserta en `auditoria_sueldos`.
+- Búsqueda: por nombre (LIKE) o RUT numérico.
+- Bloque PL/SQL ajustado: si falta `tipo_contrato`, registra error y continúa con `v_porc_tpcont=0` para poblar tablas.
 
-```
-src/main/java/com/dolphinconsulting/asignaciones/
-├── AsignacionesApplication.java       # Clase principal
-├── config/                            # Configuraciones
-│   └── OracleConfiguration.java       # Configuración de conexión a Oracle
-├── controller/                        # Controladores MVC y REST
-│   ├── AsignacionController.java      # Controlador para asignaciones
-│   └── AuditoriaController.java       # Controlador para auditorías
-├── exception/                         # Manejo de excepciones
-│   ├── AsignacionException.java       # Excepción personalizada
-│   └── GlobalExceptionHandler.java    # Manejador global de excepciones
-├── model/                             # Entidades JPA
-│   ├── AuditoriaSueldos.java          # Entidad para auditoría
-│   ├── Comuna.java                    # Entidad para comuna
-│   ├── DetalleAsignacionMes.java      # Entidad para asignaciones
-│   ├── Profesion.java                 # Entidad para profesión
-│   └── Profesional.java               # Entidad para profesional
-├── repository/                        # Repositorios JPA
-│   └── ProfesionalRepository.java     # Repositorio para profesionales
-└── service/                           # Servicios
-    └── AsignacionService.java         # Servicio para asignaciones
-```
-
-## Endpoints REST
-
-- `GET /api/asignaciones?mes={mes}&anio={anio}` - Obtener asignaciones por mes y año
-- `GET /api/errores?mes={mes}&anio={anio}` - Obtener errores de procesamiento por mes y año
-- `POST /api/procesar?mes={mes}&anio={anio}` - Procesar asignaciones para un mes y año específicos
-
-## Páginas Web
-
-- `/` - Página principal
-- `/asignaciones` - Visualización de asignaciones
-- `/auditorias` - Visualización de auditorías de cambios de sueldo
-- `/procesar` - Procesamiento de asignaciones mensuales
-
-## Integración con PL/SQL
-
-La aplicación se integra con los siguientes objetos PL/SQL:
-
-- Paquete `pkg_asignaciones` para el cálculo de asignaciones
-- Trigger de auditoría para cambios de sueldo
-- Funciones básicas para cálculos específicos
-
-## Autor
-
-Dolphin Consulting
+## Siguientes pasos opcionales
+- Parametrizar límite de asignación vía UI (nueva proc en paquete).
+- Ajustar trigger para registrar solo cambios reales (`:OLD.sueldo != :NEW.sueldo`).
+- Validación y formato de RUT (con DV).
