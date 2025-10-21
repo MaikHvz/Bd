@@ -1,0 +1,87 @@
+PREPARACION TALLER ENTREGA N° 2
+
+CONTEXTO DE NEGOCIO
+
+Dolphin Consulting es una empresa internacional, con presencia en Chile, cuya finalidad es prestar servicios de asesoramiento a las pequeñas y medianas empresas mediante profesionales con conocimientos y experiencia en las materias o temas en que dichas empresas requieran asesoría. 
+
+Para ello la empresa cuenta con una larga lista de profesionales, altamente calificados, que brindan el servicio de consultoría trabajando en forma independiente, asociados con las empresas a través de proyectos o formando parte de las organizaciones.
+Las consultorías otorgadas por Dolphin Consulting tienen por finalidad ayudar a los clientes a alcanzar sus objetivos empresariales mediante el aporte de soluciones efectivas, basadas en una combinación de innovación y prácticas aceptadas por la industria. Es un servicio de valor agregado que, bien realizado, tiene un papel importante en el despliegue de una empresa.
+El servicio de consultoría debe ser planeado. Esto significa que tiene un inicio, un desarrollo y un fin. Dicho de otra forma, debe ejecutarse mediante un plan y con uno o más entregables o resultados durante su ejecución.
+A medida que una empresa se expande, su complejidad aumenta y se hace necesario el apoyo de profesionales externos que ayuden a dar solución a los problemas que surgen.
+El servicio de consultoría externo lo realizan personas que están fuera de la organización y por lo tanto no están “contaminados” con la operación diaria o con los vicios de la compañía. El consultor, con su aporte desafiante, fresco e innovador, puede encontrar espacios u oportunidades de mejora que no alcanzan a ver aquellos que están adentro.
+Es desafiante porque sus intervenciones generan debates que son motivantes y sirven como estímulo para reflexionar y volver a pensar la forma de hacer las cosas.
+El consultor, en tanto imparcial y neutro, ayuda a encontrar soluciones e impulsa la implementación de los cambios que pueden llevar de la situación actual a la deseada. Su trabajo tiene ventajas y beneficios para la empresa cliente.
+Los servicios prestados por Dolphin Consulting incluyen asesoría financiera, económica, administrativa, estratégica, informática, entre otros. Por estos servicios la empresa cobra honorarios que se reparten en parte en utilidades para la empresa y en parte en una serie de asignaciones que se otorgan a los consultores 
+Durante los últimos años Dolphin Consulting ha tenido un crecimiento explosivo debido al éxito de sus operaciones y al hecho de que es una empresa altamente valorada por sus clientes. Dicho éxito también se ha visto reflejado en las políticas empresariales destinadas a remunerar apropiadamente a los consultores que prestan los servicios a través de la empresa. Conste que a los profesionales además se les paga un sueldo mensual acordado en el momento de su contratación.
+Específicamente, durante este año, se ha estado tratando de poner en marcha un nuevo módulo asociado a la gestión de personas, cuyo propósito es determinar las asignaciones definitivas que se pagarán mensualmente a los consultores que hayan realizado asesorías en el mes respectivo. Los beneficios actuales se calculan manualmente, modalidad que provoca muchos errores y que la Gerencia está empeñada en modificar.  
+No obstante, dado que el personal de la compañía está ocupado en múltiples actividades, la Gerencia ha decidido contratar personal externo para desarrollar este módulo, con el fin de liberar a los funcionarios de informática de esta tarea.
+Después de haber aprobado todas las etapas de selección del personal, Ud. ha sido contratado para desarrollar esta actividad. 
+
+
+
+
+
+
+
+
+1.- REGLAS DE NEGOCIO
+
+a)	Existe una asignación de movilización extra que se le paga a cualquier profesional que resida en algunas comunas de Santiago. Esta asignación equivale a:
+●	2% de la suma de sus honorarios para aquellos profesionales que vivan en Santiago y que la suma de sus honorarios es menor a $350.000
+●	4% de la suma de sus honorarios para aquellos profesionales que vivan en Ñuñoa.
+●	5% de la suma de sus honorarios para aquellos profesionales que vivan en La Reina y que la suma de sus honorarios es menor a $400.000
+●	7% de la suma de sus honorarios para aquellos profesionales que vivan en La Florida y que la suma de sus honorarios es menor a $800.000
+●	9% de la suma de sus honorarios para aquellos profesionales que vivan en Macul y que la suma de sus honorarios es menor a $680.000
+b)	Todos los profesionales tienen derecho a un incentivo adicional asociado a su tipo de contrato; este incentivo se calculará respecto de la suma de sus honorarios y los porcentajes requeridos se deben obtenerse de la tabla TIPO_CONTRATO. 
+
+ 
+
+c)	Se pagará una asignación asociada a la profesión de cada profesional; esta asignación profesional se calculará respecto del sueldo del profesional y los porcentajes asociados a cada profesión deben obtenerse de la tabla PORCENTAJE_PROFESION. 
+
+ 
+
+d)	El monto total de asignaciones de cada profesional corresponde a la suma de todas las asignaciones ya calculadas.
+
+e)	La Gerencia ha decidido también que el monto total de las asignaciones de un profesional no puede exceder de un límite que dependerá de los recursos financieros de los que disponga la empresa al momento de la ejecución del proceso y que, para este período de prueba, se ha establecido en $250.000.
+
+
+2.- REQUERIMIENTOS MÍNIMOS, EN TÉRMINOS DE DISEÑO, PARA CONSTRUIR EL PROCESO:
+
+La simulación de este nuevo proceso deberá ser implementada a través de un bloque PL/SQL Anónimo. Para esto, se deberán tener presente las siguientes consideraciones:
+
+2.1. Información que debe generar el proceso:
+a)	Se deben procesar todos los profesionales. Las asesorías que deben ser consideradas por el proceso son aquellas cuya fecha de inicio corresponda al mes y año que se está procesando.
+
+b)	Por cada profesional procesado, se debe almacenar en la tabla DETALLE_ASIGNACION MES  el mes y año de proceso, el run del profesional, nombre y apellido del profesional, profesión del profesional, número de asesorías realizadas, valor total de los honorarios correspondientes a las asesorías, asignación movilización extra, asignación por tipo de contrato, asignación por profesión y total de asignaciones de acuerdo con las reglas de negocio especificadas.
+
+c)	También se solicita almacenar en la tabla RESUMEN_MES_PROFESION el resumen por cada profesión de los datos obtenidos por el proceso: año y mes del proceso, nombre de la profesión y los montos totales por honorarios, movilización extra, tipo de contrato, profesión y total general de asignaciones.
+d)	La información de los errores que se deben controlar en el proceso deberá quedar almacenada en la tabla ERRORES_PROCESO. El valor de la columna ERROR_ID es un valor secuencial para el cual se debe usar la secuencia SQ_ERRORES.
+
+2.2.- Consideraciones para la construcción del Proceso:
+a)	Uso de variables BIND para definir:
+●	Fecha del proceso por calcular
+●	Valor límite del monto de asignación que se paga a los profesionales
+b)	Uso de VARRAY para definir:
+●	Valores de los 5 porcentajes aplicables a la asignación de movilización extra.
+c)	Uso mínimo de dos REGISTROS para almacenar información.
+d)	Se deberán TRUNCAR las tablas DETALLE_ASIGNACION_MES, RESUMEN_MES_PROFESION y ERRORES_PROCESO en tiempo de ejecución.  Esto permitirá poder ejecutar el bloque PL/SQL todas las veces que se requiera. 
+e)	En tiempo de ejecución se debe eliminar y volver a crear la secuencia utilizada para la ID de la tabla de errores.
+f)	Por eficiencia del proceso es OBLIGATORIO construir sentencias SELECT por separado de acuerdo a lo siguiente:
+●	La sentencia SELECT del CURSOR SIN PARAMETRO debe obtener SOLO los datos básicos que se deben insertar en la tabla de resultado y aquellos datos que se requieren para realizar los cálculos del proceso.
+●	Si para realizar cálculos se requieren obtener porcentajes de tablas, éstos se deben obtener en sentencias SELECT por separado.
+●	Para obtener valores en los que se requieran usar funciones de grupo para SUMAR y CONTAR, se DEBEN realizar en sentencias SELECT por separado.  Esto significa que para obtener la cantidad de asesorías realizadas y el monto total de honorarios de las asesorías realizadas se deben construir sentencias SELECT individuales. 
+●	TODOS los cálculos SE DEBEN efectuar en sentencias PL/SQL NO en las sentencias SQL utilizadas por el bloque.
+g)	Todos los cálculos deben ser redondeados en valores enteros.
+h)	El proceso debe considerar una EXCEPCION DEFINIDA POR EL USUARIO que permita controlar si el monto total que corresponde a las asignaciones calculadas para un profesional es superior al monto límite de asignación acordado por la empresa. De producirse esta situación se debe insertar el error en la tabla de errores del proceso y asignar al monto total de asignaciones el valor límite definido que es de $250.000.
+i)	El proceso debe considerar controlar CUALQUIER ERROR ORACLE que se produzca al recuperar el porcentaje de asignación para calcular la asignación asociada a la profesión.  Para este caso se debe insertar el error en la tabla de errores del proceso y asignar CERO al valor de la asignación asociada a la profesión.
+j)	En la tabla de resumen SE DEBE ORDENAR en forma ascendente por profesión.
+k)	Para efectos de prueba, deberá ejecutar su proceso considerando las asesorías del mes de junio de 2021. 
+
+
+
+
+
+
+
+
+
