@@ -1,9 +1,3 @@
--- ******************************************
--- Archivo: 03_funciones_basicas.sql
--- Autor: Estudiante de Informática
--- Fecha: 2023
--- Descripción: Crea funciones básicas para cálculos
--- ******************************************
 
 -- Función para calcular honorarios
 CREATE OR REPLACE FUNCTION fn_calcular_honorarios(
@@ -66,7 +60,5 @@ EXCEPTION
     WHEN OTHERS THEN
         NULL; -- Evita error en el registro de errores
 END;
-/
 
--- Mensaje de confirmación
-PROMPT Funciones y procedimientos básicos creados correctamente
+

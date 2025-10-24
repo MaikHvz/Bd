@@ -1,9 +1,6 @@
--- ******************************************
--- Archivo: 02_triggers.sql
--- Autor: Estudiante de Informática
--- Fecha: 2023
--- Descripción: Crea trigger para auditar cambios de sueldos
--- ******************************************
+
+--  Crea trigger para auditar cambios de sueldos
+
 
 -- Trigger que se activa cuando cambia el sueldo de un profesional
 CREATE OR REPLACE TRIGGER trg_auditoria_sueldos
@@ -31,7 +28,3 @@ BEGIN
         SYSTIMESTAMP
     );
 END;
-/
-
--- Mensaje de confirmación
-PROMPT Trigger de auditoría creado correctamente

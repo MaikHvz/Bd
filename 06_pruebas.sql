@@ -1,9 +1,4 @@
--- ******************************************
--- Archivo: 06_pruebas.sql
--- Autor: Estudiante de Informática
--- Fecha: 2023
--- Descripción: Script de pruebas para el paquete de asignaciones
--- ******************************************
+
 
 -- Configuración de salida
 SET SERVEROUTPUT ON
@@ -97,7 +92,7 @@ BEGIN
 END;
 /
 
--- Prueba 7: Listar errores registrados (sin JSON)
+-- Prueba 7: Listar errores registrados 
 DECLARE
     v_count NUMBER;
 BEGIN
@@ -181,5 +176,3 @@ BEGIN
     UPDATE profesional SET sueldo = v_old WHERE numrun_prof = v_run;
     COMMIT;
 END;
-/
-PROMPT Pruebas completadas

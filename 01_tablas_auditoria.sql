@@ -1,9 +1,3 @@
--- ******************************************
--- Archivo: 01_tablas_auditoria.sql
--- Autor: Estudiante de Informática
--- Fecha: 2023
--- Descripción: Crea tabla para auditoría de sueldos
--- ******************************************
 
 -- Tabla para guardar los cambios de sueldos
 CREATE TABLE auditoria_sueldos (
@@ -25,6 +19,3 @@ NOCACHE
 NOCYCLE;
 
 
-
--- Mensaje de confirmación
-PROMPT Tabla de auditoría y secuencia creadas correctamente

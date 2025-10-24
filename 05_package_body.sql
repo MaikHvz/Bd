@@ -1,9 +1,4 @@
--- ******************************************
--- Archivo: 05_package_body.sql
--- Autor: Estudiante de Informática
--- Fecha: 2023
--- Descripción: Implementación del paquete de asignaciones
--- ******************************************
+
 
 CREATE OR REPLACE PACKAGE BODY pkg_asignaciones AS
 
@@ -225,13 +220,6 @@ CREATE OR REPLACE PACKAGE BODY pkg_asignaciones AS
             VALUES (sq_error.NEXTVAL, v_err, 'Error general en procesamiento de asignaciones');
             COMMIT;
     END procesar_asignaciones_mes;
-    
-    -- (Eliminada función JSON: la aplicación consultará directamente DETALLE_ASIGNACION_MES)
-    
-    -- (Eliminada función JSON de errores; la aplicación puede consultar ERRORES_PROCESO si se requiere)
+
     
 END pkg_asignaciones;
-/
-
--- Mensaje de confirmación
-PROMPT Cuerpo del paquete creado correctamente

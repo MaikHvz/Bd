@@ -1,9 +1,4 @@
--- ******************************************
--- Archivo: 04_package_spec.sql
--- Autor: Estudiante de Informática
--- Fecha: 2023
--- Descripción: Especificación del paquete de asignaciones
--- ******************************************
+
 
 CREATE OR REPLACE PACKAGE pkg_asignaciones AS
     -- Variables globales
@@ -38,10 +33,7 @@ CREATE OR REPLACE PACKAGE pkg_asignaciones AS
         p_anio IN NUMBER
     );
     
-    -- (Eliminadas funciones JSON; se consulta directamente la tabla DETALLE_ASIGNACION_MES desde la app)
     
 END pkg_asignaciones;
-/
 
--- Mensaje de confirmación
-PROMPT Especificación del paquete creada correctamente
+
