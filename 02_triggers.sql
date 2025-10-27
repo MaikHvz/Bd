@@ -28,3 +28,6 @@ BEGIN
         SYSTIMESTAMP
     );
 END;
+/
+
+ALTER TRIGGER trg_auditoria_sueldos ENABLE;

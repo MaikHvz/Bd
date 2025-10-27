@@ -1,5 +1,12 @@
 
 
+-- ******************************************
+-- Archivo: 04_package_spec.sql
+-- Autor: Estudiante de Informática
+-- Fecha: 2023
+-- Descripción: Especificación del paquete de asignaciones
+-- ******************************************
+
 CREATE OR REPLACE PACKAGE pkg_asignaciones AS
     -- Variables globales
     g_limite_max_asignacion CONSTANT NUMBER := 250000;
@@ -33,7 +40,20 @@ CREATE OR REPLACE PACKAGE pkg_asignaciones AS
         p_anio IN NUMBER
     );
     
-    
+    -- Procedimiento para registrar errores (nuevo)
+    PROCEDURE registrar_error(
+        p_msg IN VARCHAR2,
+        p_msgusr IN VARCHAR2
+    );
+    -- Procedimiento para llenar detalle_asignacion_mes de un profesional
+    PROCEDURE llenar_detalle_asignacion_mes(
+        p_mes IN NUMBER,
+        p_anio IN NUMBER,
+        p_numrun_prof IN NUMBER
+    );
+
+    -- Eliminado: actualización de sueldos ahora se realiza dentro de procesar_asignaciones_mes
 END pkg_asignaciones;
+/
 
 
