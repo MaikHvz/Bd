@@ -2,21 +2,7 @@ PREPARACION TALLER ENTREGA N° 2
 
 CONTEXTO DE NEGOCIO
 
-Dolphin Consulting es una empresa internacional, con presencia en Chile, cuya finalidad es prestar servicios de asesoramiento a las pequeñas y medianas empresas mediante profesionales con conocimientos y experiencia en las materias o temas en que dichas empresas requieran asesoría. 
-
-Para ello la empresa cuenta con una larga lista de profesionales, altamente calificados, que brindan el servicio de consultoría trabajando en forma independiente, asociados con las empresas a través de proyectos o formando parte de las organizaciones.
-Las consultorías otorgadas por Dolphin Consulting tienen por finalidad ayudar a los clientes a alcanzar sus objetivos empresariales mediante el aporte de soluciones efectivas, basadas en una combinación de innovación y prácticas aceptadas por la industria. Es un servicio de valor agregado que, bien realizado, tiene un papel importante en el despliegue de una empresa.
-El servicio de consultoría debe ser planeado. Esto significa que tiene un inicio, un desarrollo y un fin. Dicho de otra forma, debe ejecutarse mediante un plan y con uno o más entregables o resultados durante su ejecución.
-A medida que una empresa se expande, su complejidad aumenta y se hace necesario el apoyo de profesionales externos que ayuden a dar solución a los problemas que surgen.
-El servicio de consultoría externo lo realizan personas que están fuera de la organización y por lo tanto no están “contaminados” con la operación diaria o con los vicios de la compañía. El consultor, con su aporte desafiante, fresco e innovador, puede encontrar espacios u oportunidades de mejora que no alcanzan a ver aquellos que están adentro.
-Es desafiante porque sus intervenciones generan debates que son motivantes y sirven como estímulo para reflexionar y volver a pensar la forma de hacer las cosas.
-El consultor, en tanto imparcial y neutro, ayuda a encontrar soluciones e impulsa la implementación de los cambios que pueden llevar de la situación actual a la deseada. Su trabajo tiene ventajas y beneficios para la empresa cliente.
-Los servicios prestados por Dolphin Consulting incluyen asesoría financiera, económica, administrativa, estratégica, informática, entre otros. Por estos servicios la empresa cobra honorarios que se reparten en parte en utilidades para la empresa y en parte en una serie de asignaciones que se otorgan a los consultores 
-Durante los últimos años Dolphin Consulting ha tenido un crecimiento explosivo debido al éxito de sus operaciones y al hecho de que es una empresa altamente valorada por sus clientes. Dicho éxito también se ha visto reflejado en las políticas empresariales destinadas a remunerar apropiadamente a los consultores que prestan los servicios a través de la empresa. Conste que a los profesionales además se les paga un sueldo mensual acordado en el momento de su contratación.
-Específicamente, durante este año, se ha estado tratando de poner en marcha un nuevo módulo asociado a la gestión de personas, cuyo propósito es determinar las asignaciones definitivas que se pagarán mensualmente a los consultores que hayan realizado asesorías en el mes respectivo. Los beneficios actuales se calculan manualmente, modalidad que provoca muchos errores y que la Gerencia está empeñada en modificar.  
-No obstante, dado que el personal de la compañía está ocupado en múltiples actividades, la Gerencia ha decidido contratar personal externo para desarrollar este módulo, con el fin de liberar a los funcionarios de informática de esta tarea.
-Después de haber aprobado todas las etapas de selección del personal, Ud. ha sido contratado para desarrollar esta actividad. 
-
+Dolphin Consulting es una empresa internacional de asesorías para pymes que trabaja con consultores externos especializados. Ofrece servicios financieros, administrativos, estratégicos y más, buscando aportar soluciones innovadoras y efectivas. Debido a su crecimiento, la empresa quiere automatizar el cálculo de asignaciones mensuales a sus consultores —proceso que hoy se hace manualmente— y ha contratado a un profesional externo (tú) para desarrollar este nuevo módulo de gestión de personas.
 
 
 
